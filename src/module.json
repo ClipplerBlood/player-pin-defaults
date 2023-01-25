@@ -35,9 +35,12 @@
     }
   ],
   "relationships": {
-    "systems": [],
-    "requires": [],
-    "conflicts": []
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module"
+      }
+    ]
   },
   "socket": false,
   "manifest": "This is auto replaced",

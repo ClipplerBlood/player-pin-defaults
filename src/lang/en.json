@@ -1,1 +1,25 @@
-{}
+{
+  "player-pin-defaults.settings": {
+    "names": {
+      "global": "Player Notes Globally Visible",
+      "pinImage": "Default Pin Image",
+      "playerColorImage": "Player Color as Default Pin Image Color",
+      "playerToken": "Player Token as Pin Image",
+      "imageSize": "Image Size",
+      "fontSize": "Font Size",
+      "anchorPoint": "Text Anchor Point",
+      "addPlayerName": "Player Name added to Text",
+      "playerColorText": "Player Color as Text Color"
+    },
+    "hints": {
+      "global": "When on, Globally Visited option is automatically applied, so all players can see this player’s notes.",
+      "pinImage": "Link to an image that will be used as default icon for any player-made pins.",
+      "playerColorImage": "When on, the player’s color is used to tint the default image above, not used for the token option below.",
+      "playerToken": "Sets the default pin token to the player’s own token",
+      "imageSize": "Default 100",
+      "fontSize": "Default 32",
+      "addPlayerName": "When on, the format of the pin label is \"<pinlabel> /n <name of character>\" on two lines.",
+      "playerColorText": "When on, the player’s color is used to tint the text color"
+    }
+  }
+}

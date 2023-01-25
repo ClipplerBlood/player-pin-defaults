@@ -1,47 +1,78 @@
-// SPDX-FileCopyrightText: 2022 Johannes Loher
-//
-// SPDX-License-Identifier: MIT
-
-/**
- * This is your JavaScript entry file for Foundry VTT.
- * Register custom settings, sheets, and constants using the Foundry API.
- * Change this heading to be more descriptive to your module, or remove it.
- * Author: [your name]
- * Content License: [copyright and-or license] If using an existing system
- * 					you may want to put a (link to a) license or copyright
- * 					notice here (e.g. the OGL).
- * Software License: [your license] Put your desired license here, which
- * 					 determines how others may use and modify your module.
- */
-
-// Import JavaScript modules
 import { registerSettings } from './settings.js';
-import { preloadTemplates } from './preloadTemplates.js';
 
-// Initialize module
+/* global libWrapper */
+const modSetting = (x) => game.settings.get('player-pin-defaults', x);
+
 Hooks.once('init', async () => {
   console.log('player-pin-defaults | Initializing player-pin-defaults');
-
-  // Assign custom classes and constants here
-
-  // Register custom module settings
   registerSettings();
-
-  // Preload Handlebars templates
-  await preloadTemplates();
-
-  // Register custom sheets (if any)
+  libWrapper.register('player-pin-defaults', 'NoteConfig.prototype.getData', getNoteConfigData);
+  libWrapper.register('player-pin-defaults', 'NoteConfig.prototype._getSubmitData', function (wrapped, ...args) {
+    const data = wrapped(...args);
+    if (modSetting('addPlayerName') && !game.user.isGM) {
+      data.text += `\n${game.user.character?.name ?? game.user.name}`;
+    }
+    return data;
+  });
 });
 
-// Setup module
-Hooks.once('setup', async () => {
-  // Do anything after initialization but before
-  // ready
-});
+/**
+ * Wrapper for NoteConfig.getData
+ * Data returned is overridden by the module's
+ * The wrapped function returns an object (noteData) which contains a .data field, which contains what we want to modify
+ * So we override noteData.data
+ * @param wrapped
+ * @param args
+ * @return {*}
+ */
+function getNoteConfigData(wrapped, ...args) {
+  let noteData = wrapped(...args);
+  if (game.user.isGM) return noteData;
 
-// When ready
-Hooks.once('ready', async () => {
-  // Do anything once the module is ready
-});
+  const defaults = getPinDefaults();
+  // console.log(noteData);
+  noteData = mergeObject(noteData, defaults);
+  // console.log(noteData);
+  return noteData;
+}
 
-// Add any additional hooks if necessary
+/**
+ * Returns the object containing the defaults used for overriding the getData in NoteConfig
+ */
+function getPinDefaults() {
+  const playerColor = game.user.color;
+  const tokenImg = game.user.character.prototypeToken?.texture.src;
+  const usePlayerToken = modSetting('playerToken') && tokenImg?.length > 0;
+  const defaultImage = modSetting('pinImage');
+
+  let customIcon = null;
+  if (usePlayerToken) customIcon = tokenImg;
+  else if (defaultImage?.length > 0) customIcon = defaultImage;
+
+  const usePlayerColorTint = modSetting('playerColorImage');
+  let tintIcon = null;
+  if (usePlayerColorTint && !usePlayerToken) tintIcon = playerColor;
+
+  let defaults = {
+    data: {
+      global: modSetting('global'),
+      iconSize: modSetting('imageSize'),
+      textAnchor: modSetting('anchorPoint'),
+      textColor: modSetting('playerColorText') ? playerColor : null,
+      fontSize: modSetting('fontSize'),
+      texture: {
+        tint: tintIcon,
+      },
+    },
+    icon: {
+      selected: customIcon ? '' : null,
+      custom: customIcon,
+    },
+  };
+
+  defaults = flattenObject(defaults);
+  // eslint-disable-next-line no-unused-vars
+  defaults = Object.fromEntries(Object.entries(defaults).filter(([_, v]) => v != null));
+  defaults = expandObject(defaults);
+  return defaults;
+}
