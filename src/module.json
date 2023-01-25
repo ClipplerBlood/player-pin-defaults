@@ -15,9 +15,9 @@
   ],
   "url": "This is auto replaced",
   "license": "https://opensource.org/licenses/MIT",
-  "readme": "<optionally the URL to your readme>",
-  "bugs": "<optionally the URL to your issue list>",
-  "changelog": "<optionally the URL to your changelog>",
+  "readme": "https://github.com/ClipplerBlood/player-pin-defaults",
+  "bugs": "https://github.com/ClipplerBlood/player-pin-defaults/issues",
+  "changelog": "https://github.com/ClipplerBlood/player-pin-defaults/releses",
   "version": "This is auto replaced",
   "compatibility": {
     "minimum": "10",
