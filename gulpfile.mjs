@@ -55,7 +55,7 @@ function buildCode() {
  */
 function buildStyles() {
   return gulp
-    .src(`${stylesDirectory}/${packageId}.${stylesExtension}`)
+    .src(`${stylesDirectory}/${packageId}.${stylesExtension}`, { allowEmpty: true })
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(`${distDirectory}/styles`));
 }

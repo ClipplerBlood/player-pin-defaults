@@ -1,16 +1,20 @@
 {
   "id": "player-pin-defaults",
-  "title": "<human readable title for player-pin-defaults>",
-  "description": "<description of the package>",
+  "title": "Player Pin Defaults",
+  "description": "This mod improves the defaults of player-made pins in Foundry, making it easier for players to document maps such as dungeons. ",
   "authors": [
     {
-      "name": "<your name>",
-      "email": "<optionally your e-mail address>",
-      "discord": "<optionally your discord username>"
+      "name": "ClipplerBlood",
+      "discord": "ClipplerBlood#8146"
+    },
+    {
+      "name": "ApoApostolov",
+      "email": "theapoapostolov@gmail.com",
+      "discord": "ApoApostolov#4622"
     }
   ],
   "url": "This is auto replaced",
-  "license": "<please choose an appropriate license. https://choosealicense.com/ is a great place to get more information if you are unsure>",
+  "license": "https://opensource.org/licenses/MIT",
   "readme": "<optionally the URL to your readme>",
   "bugs": "<optionally the URL to your issue list>",
   "changelog": "<optionally the URL to your changelog>",
@@ -21,7 +25,7 @@
   },
   "scripts": [],
   "esmodules": ["module/player-pin-defaults.js"],
-  "styles": ["styles/player-pin-defaults.css"],
+  "styles": [],
   "packs": [],
   "languages": [
     {
