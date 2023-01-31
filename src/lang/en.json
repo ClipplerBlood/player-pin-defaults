@@ -9,7 +9,8 @@
       "fontSize": "Font Size",
       "anchorPoint": "Text Anchor Point",
       "addPlayerName": "Player Name added to Text",
-      "playerColorText": "Player Color as Text Color"
+      "playerColorText": "Player Color as Text Color",
+      "alwaysShowText": "Text always visible"
     },
     "hints": {
       "global": "When on, Globally Visited option is automatically applied, so all players can see this player’s notes.",
@@ -19,7 +20,8 @@
       "imageSize": "Default 100",
       "fontSize": "Default 32",
       "addPlayerName": "When on, the format of the pin label is \"<pinlabel> /n <name of character>\" on two lines.",
-      "playerColorText": "When on, the player’s color is used to tint the text color"
+      "playerColorText": "When on, the player’s color is used to tint the text color",
+      "alwaysShowText": "[Requires Pin Cushion] When on, player notes text will default to \"text always visible\""
     }
   }
 }

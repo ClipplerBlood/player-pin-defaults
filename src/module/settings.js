@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
+import { pinCushionInstalled } from './player-pin-defaults.js';
+
 export function registerSettings() {
   game.settings.register('player-pin-defaults', 'global', {
     name: 'player-pin-defaults.settings.names.global',
@@ -90,4 +92,15 @@ export function registerSettings() {
     type: Boolean,
     default: false,
   });
+
+  if (pinCushionInstalled()) {
+    game.settings.register('player-pin-defaults', 'alwaysShowText', {
+      name: 'player-pin-defaults.settings.names.alwaysShowText',
+      hint: 'player-pin-defaults.settings.hints.alwaysShowText',
+      scope: 'world',
+      config: true,
+      type: Boolean,
+      default: false,
+    });
+  }
 }
